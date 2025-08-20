@@ -63,7 +63,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
                     variant="ghost"
                     size="icon"
                     onClick={handleToggleSave}
-                    className={`absolute top-2 right-2 z-10 bg-white/90 rounded-full p-1.5 ${isSaved
+                    className={`absolute top-2 right-2 z-10 bg-gray-100 shadow-xl  cursor-pointer rounded-full p-1.5 ${isSaved
                             ? 'text-red-500 hover:text-red-600'
                             : 'text-gray-600 hover:text-gray-900'
                         }`}

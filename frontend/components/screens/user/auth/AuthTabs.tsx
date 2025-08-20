@@ -36,7 +36,7 @@ export function AuthTabs({ initialTab = "login", onSuccess }: AuthTabsProps) {
           <LoginForm onSuccess={onSuccess} onSwitchToSignup={handleSwitchToSignup} />
         </TabsContent>
         <TabsContent value="signup">
-          <SignupForm onSuccess={onSuccess} onSwitchToLogin={handleSwitchToLogin} />
+          <SignupForm  onSwitchToLogin={handleSwitchToLogin} />
         </TabsContent>
       </Tabs>
     </div>

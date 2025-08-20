@@ -1,5 +1,4 @@
 "use client";
-
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { User } from "@/types/auth/user";
 import { toast } from "sonner";
@@ -88,7 +87,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       document.cookie = `refreshToken=${tokens.refreshToken}; path=/; max-age=${7 * 24 * 60 * 60}`; // 7 days
       document.cookie = `userRole=${userData.role}; path=/; max-age=${7 * 24 * 60 * 60}`; // 7 days
 
-      toast.success(`Welcome back, ${userData.name}!`);
     } catch (error) {
       console.error("Error during login:", error);
       toast.error("Failed to save login data");
@@ -112,7 +110,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       document.cookie = "refreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
       document.cookie = "userRole=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-      toast.success("Logged out successfully");
     } catch (error) {
       console.error("Error during logout:", error);
     }

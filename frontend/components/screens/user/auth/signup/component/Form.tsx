@@ -15,7 +15,7 @@ type Props = {
   onSwitchToLogin?: () => void;
 }
 
-export const SignupForm = ({ onSuccess, onSwitchToLogin }: Props) => {
+export const SignupForm = ({  onSwitchToLogin }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [lookUpPass, setLookUpPass] = useState<boolean>(false)
 
@@ -37,7 +37,9 @@ export const SignupForm = ({ onSuccess, onSwitchToLogin }: Props) => {
 			
 			if (response.status === "success") {
 				toast.success("Account created successfully! Please login to continue.");
-				onSuccess?.();
+				onSwitchToLogin?.();
+				// onSuccess?.();
+
 			} else {
 				toast.error(response.message || "Signup failed. Please try again.");
 			}

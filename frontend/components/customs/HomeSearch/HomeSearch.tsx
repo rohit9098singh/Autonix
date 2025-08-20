@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const HomeSearch = () => {
   const router = useRouter();
@@ -115,7 +116,7 @@ const HomeSearch = () => {
           <div className="mt-4 p-4 border border-dashed rounded-lg bg-white/80 shadow">
             {imagePreview ? (
               <div className="mb-4 flex flex-col items-center">
-                <img
+                <Image
                   src={imagePreview}
                   alt="Preview"
                   className="max-h-40 rounded-lg shadow mb-3"

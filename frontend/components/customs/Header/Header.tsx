@@ -4,53 +4,22 @@ import { ArrowLeft, CarFront, Heart, Layout } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { usePathname, useRouter } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import AuthTabs from "@/components/screens/auth/AuthTabs";
+import { usePathname } from "next/navigation";
 import { useModal } from "@/context/modal-context";
 import { useAuth } from "@/context/AuthContext";
-import { logoutUser } from "@/services/auth-services";
-import { toast } from "sonner";
+import DropDown from "./components/DropDown"
+import AuthTabs from "@/components/screens/user/auth/AuthTabs";
 
-const Header = ({ isAdminPage }: { isAdminPage?: boolean }) => {
+const Header = () => {
   const { openModal, closeModal } = useModal();
-  const { user, isLoggedIn, isAdmin, logout } = useAuth();
+  const {  isLoggedIn, isAdmin } = useAuth();
   const pathname = usePathname();
-  const router=useRouter();
-  
+
   // Auto-detect admin page if not explicitly provided
-  const isOnAdminPage = isAdminPage ?? pathname?.startsWith('/admin');
+  const isOnAdminPage = (pathname?.startsWith('/admin') && isAdmin);
 
   const handleLoginClick = () => {
     openModal(<AuthTabs initialTab="login" onSuccess={closeModal} />);
-  }
-
-  // const handleSignupClick = () => {
-  //   openModal(<AuthTabs initialTab="signup" onSuccess={closeModal} />);
-  // }
-
-  const handleLogout = async () => {
-    try {
-      await logoutUser(); // Call the API
-      logout();
-      toast.success("Logged out successfully");
-    } catch (error: any) {
-      console.error("Logout error:", error);
-      logout();
-      toast.success("Logged out successfully");
-    }
-  }
-
-  const handleProfileRedirect=()=>{
-     router.push("/profile")
   }
 
   return (
@@ -71,12 +40,16 @@ const Header = ({ isAdminPage }: { isAdminPage?: boolean }) => {
 
         <div className="flex items-center gap-4">
           {isOnAdminPage ? (
-            <Link href={"/"}>
-              <Button>
-                <ArrowLeft size={18} />
-                <span>Back to App</span>
-              </Button>
-            </Link>
+            <div className="flex gap-4 items-center">
+
+              <Link href={"/"}>
+                <Button>
+                  <ArrowLeft size={18} />
+                  <span>Back to App</span>
+                </Button>
+              </Link>
+              <DropDown/>
+            </div>
           ) : isLoggedIn ? (
             <>
               <Link href={"/saved-cars"}>
@@ -101,50 +74,13 @@ const Header = ({ isAdminPage }: { isAdminPage?: boolean }) => {
                   </Button>
                 </Link>
               )}
-
-              {/* Avatar Dropdown using shadcn */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="cursor-pointer h-10 w-10">
-                    <AvatarImage src={user?.imageUrl || "/avatar.png"} alt="user avatar" />
-                    <AvatarFallback>
-                      {user?.name?.charAt(0) || "U"}
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuLabel>
-                    <div className="flex gap-2">
-                      <Avatar className="cursor-pointer">
-                        <AvatarImage src={user?.imageUrl || "/avatar.png"} alt="user avatar" />
-                        <AvatarFallback>
-                          {user?.name?.charAt(0) || "U"}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="font-medium">{user?.name || "User"}</div>
-                        <div className="text-xs text-muted-foreground">{user?.email || ""}</div>
-                      </div>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} >
-                    Sign Out
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleProfileRedirect} >
-                    profile
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+               <DropDown/>
             </>
           ) : (
             <div className="flex gap-2">
               <Button variant="outline" onClick={handleLoginClick}>
                 <span>Login</span>
               </Button>
-              {/* <Button onClick={handleSignupClick}>
-                <span>Sign Up</span>
-              </Button> */}
             </div>
           )}
         </div>

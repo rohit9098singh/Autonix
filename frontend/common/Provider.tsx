@@ -19,10 +19,10 @@ export const Provider: React.FC<{ children: React.ReactNode }> = ({ children }) 
         <QueryClientProvider client={queryClient}>
             <AuthProvider>
                 <ModalProvider>
-                    {/* <AuthModalProvider> */}
+                  
                         <NextTopLoader showSpinner={false} color="#0CAF60" />
                         {children}
-                    {/* </AuthModalProvider> */}
+                  
                 </ModalProvider>
             </AuthProvider>
         </QueryClientProvider>

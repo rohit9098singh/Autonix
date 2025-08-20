@@ -1,25 +1,17 @@
 import CarCard from "@/components/customs/CarCard/CarCard";
 import HomeSearch from "@/components/customs/HomeSearch/HomeSearch";
-import AuthModalHandler from "@/components/customs/AuthModalHandler/AuthModalHandler";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { bodyTypes, carMakes, faqItems, featuredCars } from "@/lib/data";
 import { Calendar, Car, ChevronRight, Shield, Star, TrendingUp, Users, Search, Zap, Award } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export default function Home() {
-  const isLoggedIn = false;
   return (
     <div className="pt-18 flex flex-col overflow-hidden">
-      {/* Handle automatic login modal opening */}
-      <Suspense fallback={null}>
-        <AuthModalHandler />
-      </Suspense>
-      
       {/* Hero Section - Enhanced with animations and better visuals */}
-      <section className="relative py-20 md:py-32 dotted-background overflow-hidden ">
+      <section className="relative py-20  dotted-background overflow-hidden ">
         {/* Floating elements for visual interest */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
@@ -35,14 +27,14 @@ export default function Home() {
           </div>
           
           <div className="mb-12">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl mb-6 gradient-title leading-tight animate-fadeInUp delay-100">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl mb-6 gradient-title leading-tight animate-fadeInUp delay-100">
               Find Your Dream Car 
               <br />
               <span className="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 With Vehiql AI
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed animate-fadeInUp delay-200">
+            <p className="text-xl md:text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed animate-fadeInUp delay-200">
               Experience the future of car shopping with advanced AI search, instant test drive booking, and thousands of verified vehicles
             </p>
           </div>
@@ -132,7 +124,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Browse By Make</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Discover vehicles from the world's most trusted automotive brands</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">Discover vehicles from the World&rsquo;s most trusted automotive brands</p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">

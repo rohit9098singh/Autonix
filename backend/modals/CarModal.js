@@ -25,6 +25,7 @@ const carSchema = new mongoose.Schema(
     //   ref: "DealershipInfo",
     //   required: true,
     // },
+    order:Number
   },
   { timestamps: true }
 );
